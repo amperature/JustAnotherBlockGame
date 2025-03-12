@@ -8,8 +8,8 @@ public class Piece : MonoBehaviour
     public Vector3Int position { get; private set; } //tilemaps use vector3int and not vector 2
     public int rotationIndex { get; private set; }
 
-    public float stepDelay = 1f;
-    public float lockDelay = 0.5f;
+    public float stepDelay = 10f;
+    public float lockDelay = 10f;
 
     private float stepTime;
     private float lockTime;
@@ -71,7 +71,7 @@ public class Piece : MonoBehaviour
     }
 
     private void Gravity() {
-        this.stepTime = Time.time + this.stepDelay;
+        this.stepTime = Time.deltaTime + this.stepDelay;
 
         Move(Vector2Int.down);
 
@@ -88,6 +88,7 @@ public class Piece : MonoBehaviour
 
     private void Lock() {
         this.board.Set(this);
+        this.board.ClearLines();
         this.board.SpawnPiece();
     }
 
