@@ -81,4 +81,56 @@ public class BoardBehavior : MonoBehaviour
         }
         return true;
     }  
-}
+
+    public void ClearLines() {
+        RectInt bounds = this.bounds;
+
+        int row = bounds.yMin;
+        while (row < bounds.yMax) {
+
+            if(IsLineFull(row)) {
+                LineClear(row);
+            }
+            else {
+                row++;
+            }
+        }
+    }
+
+    private bool IsLineFull(int row) {
+        
+        RectInt bounds = this.bounds;
+
+        for (int col = bounds.xMin; col < bounds.xMax; col++) {
+
+            Vector3Int position = new Vector3Int(col, row, 0);
+
+            if(!this.tilemap.HasTile(position)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void LineClear(int row) {
+
+        RectInt bounds = this.bounds;
+
+        for (int col = bounds.xMin; col < bounds.xMax; col++) {
+
+            Vector3Int position = new Vector3Int(col, row, 0);
+
+            this.tilemap.SetTile(position, null);
+        }
+            while (row < bounds.yMax) {
+                for (int col = bounds.xMin; col < bounds.xMax; col++) {
+                    Vector3Int position = new Vector3Int(col, row + 1, 0);
+                    TileBase above = this.tilemap.GetTile(position);
+
+                    position = new Vector3Int(col, row, 0);
+                    this.tilemap.SetTile(position, above);
+
+                }
+            }
+    }
+} 
