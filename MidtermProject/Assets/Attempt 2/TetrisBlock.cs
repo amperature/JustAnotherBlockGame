@@ -19,6 +19,7 @@ public class TetrisBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             transform.position += new Vector3(-1, 0, 0);
             if(!ValidMove()) {
@@ -52,6 +53,10 @@ public class TetrisBlock : MonoBehaviour
             previousTime = Time.time;
         }
 
+        if (transform.hierarchyCount == 0) {
+            Destroy(this.gameObject);
+        }
+
     }
 
     void AddToGrid() 
@@ -60,7 +65,15 @@ public class TetrisBlock : MonoBehaviour
             int roundedX = Mathf.RoundToInt(children.transform.position.x);
             int roundedY = Mathf.RoundToInt(children.transform.position.y);
 
+            if (roundedY > 1)
+            {
+                Debug.Log("yeah");
+            }            
+
             grid[roundedX, roundedY] = children;
+
+            Debug.Log(roundedY);
+            
         }
     }
 

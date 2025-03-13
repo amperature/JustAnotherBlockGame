@@ -14,8 +14,8 @@ public class SpawnTetramino : MonoBehaviour
     GameObject RenderNext;
 
     public GameObject Randomizer() {
-        Debug.Log("current: " + currentPiece);
-        Debug.Log("next: " + nextPiece);
+        //Debug.Log("current: " + currentPiece);
+        //Debug.Log("next: " + nextPiece);
         currentPiece = nextPiece;
         nextPiece = Random.Range(0, bag.Count-1);
         if (bag.Count == 0)
@@ -32,7 +32,6 @@ public class SpawnTetramino : MonoBehaviour
     {
         NewTetramino();
     }
-
 
     // Update is called once per frame
 
