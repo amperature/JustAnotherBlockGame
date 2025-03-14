@@ -391,10 +391,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7509563622927135094}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12726e088c4574da7a57b8d3056c3435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationPoint: {x: 1, y: 1, z: 0}
-  fallTime: 0.8

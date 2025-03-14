@@ -2,22 +2,45 @@ using UnityEngine;
 using System.Collections.Generic;
 public class NextTetramino : MonoBehaviour
 {
+    [SerializeField] private TetrisBlock[] Tetrominoes;
+    List<TetrisBlock> bag = new List<TetrisBlock>();
 
-    //[SerializeField] private GameObject[] NextTetrominoes;
+    private TetrisBlock nextPiece; // Prefab reference
+    private GameObject nextPieceInstance; //The Clone Itself
 
-    // GameObject NextPiece() {
-    //     GameObject p = SpawnTetramino.bag[nextPiece];
-    //     return p;
-    // }
+    public TetrisBlock Randomizer() {
+        FillBag();
+        TetrisBlock p = bag[0];
+        bag.RemoveAt(0);
+        return p;
+    }
 
-    void Start()
+    void FillBag() {
+        if (bag.Count == 0)
+        {
+            bag.AddRange(Tetrominoes);
+            bag.Shuffle();
+        }
+        
+    }
+    void Update()
     {
         RenderNext();
     }
 
-    // Update is called once per frame
-
     public void RenderNext() {
-       //Instantiate(NextPiece(), transform.position, Quaternion.identity);
+   
+        if (bag.Count == 0) {
+            FillBag();
+        }
+     if (nextPiece != bag[0]) {
+        if (nextPieceInstance != null) {
+            Destroy(nextPieceInstance);
+        }
+
+        nextPieceInstance = Instantiate(bag[0].gameObject, transform.position, Quaternion.identity);
+
+        nextPiece = bag[0];
+     }
     }
 }

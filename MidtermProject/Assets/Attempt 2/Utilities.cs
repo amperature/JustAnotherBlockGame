@@ -9,4 +9,13 @@ public static class Utilities
         Play,
         Pause
     }
+
+    public static void Shuffle<T>(this List<T> thisList) { //Spirit Drop Shuffle Tuple Method
+        int n = thisList.Count;
+        while(n-- > 1) {
+            int k = Random.Range(0, n);
+            (thisList[k], thisList[n]) = (thisList[n], thisList[k]);
+        }
+    }
+
 }
