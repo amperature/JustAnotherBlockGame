@@ -13,6 +13,7 @@ public class GameBehavior : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _pauseMessage;
     [SerializeField] private TextMeshProUGUI jabg;
+    //private TextMeshProUGUI 
     public static GameBehavior Instance;
     public Utilities.GameplayState State;
 
@@ -30,7 +31,22 @@ public class GameBehavior : MonoBehaviour
             _scoreUI.text = Score.ToString();
         }
     }
+    private int _progress;
+    public int Progress
+
+        {
+        // Getter property
+        get => _progress;
+        
+        // Setter property
+        set
+        {
+            _progress = value;
+            _progressUI.text = Progress.ToString();
+        }
+    }
     [SerializeField] private TextMeshProUGUI _scoreUI;
+    [SerializeField] private TextMeshProUGUI _progressUI;
 
     void Awake()
     {
@@ -86,6 +102,10 @@ public class GameBehavior : MonoBehaviour
     public void LosePoint() 
     {
         Score--;
+    }
+
+    public void AddProgress() {
+        Progress++;
     }
 
     void QuitApp()

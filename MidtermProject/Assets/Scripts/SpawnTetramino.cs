@@ -10,7 +10,7 @@ public class SpawnTetramino : MonoBehaviour
             
             TetrisBlock piece = nexttetramino.Randomizer();
             GameObject go = Instantiate(piece.gameObject, transform.position, Quaternion.identity);
-            
+            GameBehavior.Instance.AddProgress();
         return go.GetComponent<TetrisBlock>();
     }
     
