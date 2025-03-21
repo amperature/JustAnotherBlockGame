@@ -16,8 +16,12 @@ public class GameBehavior : MonoBehaviour
     //private TextMeshProUGUI 
     public static GameBehavior Instance;
     public Utilities.GameplayState State;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip pieceDrop;
+    [SerializeField] private AudioClip lineClear;
 
     private int _score;
+    public bool PieceDrop = false;
     public int Score
 
         {
@@ -97,6 +101,7 @@ public class GameBehavior : MonoBehaviour
     public void ScorePoint()
     {
         Score++;
+        audioSource.PlayOneShot(lineClear);
     }
     
     public void LosePoint() 
@@ -106,6 +111,7 @@ public class GameBehavior : MonoBehaviour
 
     public void AddProgress() {
         Progress++;
+        audioSource.PlayOneShot(pieceDrop);
     }
 
     void QuitApp()
@@ -118,4 +124,7 @@ public class GameBehavior : MonoBehaviour
             Application.Quit();
         #endif
     }
+
+
+
 }

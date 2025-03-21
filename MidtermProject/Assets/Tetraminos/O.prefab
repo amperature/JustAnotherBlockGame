@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationPoint: {x: 0.5, y: 0.5, z: 0}
+  pieceDrop: {fileID: 8300000, guid: e7ec02e3e867d49df8a34360d36c53b5, type: 3}
+  lineClear: {fileID: 8300000, guid: a694c1fb2ff924da3a894ea1b3ae61db, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &4140674983663442418
 GameObject:
   m_ObjectHideFlags: 0

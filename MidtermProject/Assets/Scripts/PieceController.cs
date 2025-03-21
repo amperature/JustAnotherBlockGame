@@ -6,13 +6,11 @@ public class PieceController : MonoBehaviour
     [SerializeField] private SpawnTetramino spawner;
     [SerializeField] private Transform HoldContainer;
     private float previousTime;
-    public float fallTime = 0.1f;
-    public float softDropTime = 0.01f;
+    public float fallTime = 0.01f;
+    public float softDropTime = 0.005f;
     private TetrisBlock CurrentPiece;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    [SerializeField] private AudioClip pieceDrop;
-    [SerializeField] private AudioClip lineClear;
     //[SerializeField] private AudioClip borderHit;
 
     //public IEnumerator PieceSlow;
@@ -24,13 +22,13 @@ public class PieceController : MonoBehaviour
     IEnumerator PieceSlow() {
             if (Input.GetKeyDown(KeyCode.A)) {
 
-            fallTime = 0.001f;
+            fallTime = 2f;
             Debug.Log("yeah");
             }
         yield return new WaitForSeconds(0.2f);
 
-        if (Input.GetKeyDown(KeyCode.A)) {
-            fallTime = 0.1f;
+        if (Input.GetKeyUp(KeyCode.A)) {
+            fallTime = 0.01f;
         }
         //fallTime = 1f;
 
@@ -53,7 +51,7 @@ public class PieceController : MonoBehaviour
                 }
             }
 
-            else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            else if (Input.GetKeyDown(KeyCode.RightArrow)) { //use coroutine for movement left to right. set speed for frame
                 CurrentPiece.transform.position += new Vector3(1, 0, 0);
                 if(!CurrentPiece.ValidMove()) {
                     CurrentPiece.transform.position -= new Vector3(1, 0, 0);

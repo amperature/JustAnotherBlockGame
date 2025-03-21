@@ -697,7 +697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -247.87097, y: 174}
+  m_AnchoredPosition: {x: -242.48444, y: 203}
   m_SizeDelta: {x: 300, y: 44}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &673139458
@@ -1097,8 +1097,6 @@ MonoBehaviour:
   HoldContainer: {fileID: 752965237}
   fallTime: 0.8
   softDropTime: 0.1
-  pieceDrop: {fileID: 8300000, guid: a694c1fb2ff924da3a894ea1b3ae61db, type: 3}
-  lineClear: {fileID: 8300000, guid: e7ec02e3e867d49df8a34360d36c53b5, type: 3}
 --- !u!4 &1255245396
 Transform:
   m_ObjectHideFlags: 0
@@ -1837,6 +1835,10 @@ MonoBehaviour:
   _pauseMessage: {fileID: 673139458}
   jabg: {fileID: 34968510}
   State: 0
+  audioSource: {fileID: 1302577499}
+  pieceDrop: {fileID: 8300000, guid: e7ec02e3e867d49df8a34360d36c53b5, type: 3}
+  lineClear: {fileID: 8300000, guid: a694c1fb2ff924da3a894ea1b3ae61db, type: 3}
+  PieceDrop: 0
   _scoreUI: {fileID: 448937809}
   _progressUI: {fileID: 390320974}
 --- !u!1660057539 &9223372036854775807
