@@ -46,20 +46,20 @@ public class PieceController : MonoBehaviour
     void Update()
     {
         if (GameBehavior.Instance.State == Utilities.GameplayState.Play) {
-            if (Input.GetKey(KeyCode.LeftArrow)) {
+            if (Input.GetKey(KeyCode.LeftArrow) && t <= 0) {
                 CurrentPiece.transform.position += new Vector3(-1, 0, 0);
                 if(!CurrentPiece.ValidMove()) {
                     CurrentPiece.transform.position -= new Vector3(-1, 0, 0); //redo this code
                 }
             }
 
-            else if (Input.GetKey(KeyCode.RightArrow)) { //use coroutine for movement left to right. set speed for frame
+            else if (Input.GetKey(KeyCode.RightArrow) && t <= 0) { //use coroutine for movement left to right. set speed for frame
                 CurrentPiece.transform.position += new Vector3(1, 0, 0);
                 if(!CurrentPiece.ValidMove()) {
                     CurrentPiece.transform.position -= new Vector3(1, 0, 0);
                 }
             }
-
+                t -= Time.deltaTime * 0.2f;
             if(Input.GetKeyDown(KeyCode.UpArrow)) {
                 CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), 90);
                 if(!CurrentPiece.ValidMove()) {
@@ -91,7 +91,6 @@ public class PieceController : MonoBehaviour
             //}
 
             CheckForHold();
-            t -= Time.deltaTime;
         }
 
     }
