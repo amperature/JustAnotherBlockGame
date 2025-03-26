@@ -8,7 +8,9 @@ public class PieceController : MonoBehaviour
     private float previousTime;
     public float fallTime = 0.01f;
     public float softDropTime = 0.005f;
+    public float arr = 0.2f;
     private TetrisBlock CurrentPiece;
+    private float t;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     //[SerializeField] private AudioClip borderHit;
@@ -44,21 +46,21 @@ public class PieceController : MonoBehaviour
     void Update()
     {
         if (GameBehavior.Instance.State == Utilities.GameplayState.Play) {
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            if (Input.GetKey(KeyCode.LeftArrow)) {
                 CurrentPiece.transform.position += new Vector3(-1, 0, 0);
                 if(!CurrentPiece.ValidMove()) {
                     CurrentPiece.transform.position -= new Vector3(-1, 0, 0); //redo this code
                 }
             }
 
-            else if (Input.GetKeyDown(KeyCode.RightArrow)) { //use coroutine for movement left to right. set speed for frame
+            else if (Input.GetKey(KeyCode.RightArrow)) { //use coroutine for movement left to right. set speed for frame
                 CurrentPiece.transform.position += new Vector3(1, 0, 0);
                 if(!CurrentPiece.ValidMove()) {
                     CurrentPiece.transform.position -= new Vector3(1, 0, 0);
                 }
             }
 
-            else if(Input.GetKeyDown(KeyCode.UpArrow)) {
+            if(Input.GetKeyDown(KeyCode.UpArrow)) {
                 CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), 90);
                 if(!CurrentPiece.ValidMove()) {
                 CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), -90);
@@ -89,6 +91,7 @@ public class PieceController : MonoBehaviour
             //}
 
             CheckForHold();
+            t -= Time.deltaTime;
         }
 
     }
