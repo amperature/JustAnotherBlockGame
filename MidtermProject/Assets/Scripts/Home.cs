@@ -13,7 +13,7 @@ public class HomeScreen : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyUp(KeyCode.Return)) {
-            SceneManager.LoadScene("Home");
+            SceneManager.LoadScene("Tetris2");
         }
     }
 }
