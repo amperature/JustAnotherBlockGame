@@ -10,29 +10,12 @@ public class PieceController : MonoBehaviour
     public float fallTime = 0.01f;
     public float softDropTime = 0.005f;
     private TetrisBlock CurrentPiece;
-    //[SerializeField] private SpawnTetramino spawner;
 
-    [SerializeField] private TextMeshProUGUI timeUI;
+    //[SerializeField] private TextMeshProUGUI timeUI;
 
     private float timer;
-    public float _Time
-
-        {
-        // Getter property
-        get => timer;
-        
-        // Setter property
-        set
-        {
-            timer = value;
-            timeUI.text = _Time.ToString();
-        }
-    }
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    //[SerializeField] private AudioClip borderHit;
 
     //public IEnumerator PieceSlow;
 
@@ -65,26 +48,26 @@ public class PieceController : MonoBehaviour
     void Update()
     {
         if (GameBehavior.Instance.State == Utilities.GameplayState.Play) {
-                timer += Time.time;
-                Debug.Log(timer);
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-                CurrentPiece.transform.position += new Vector3(-1, 0, 0);
-                if(!CurrentPiece.ValidMove()) {
-                    CurrentPiece.transform.position -= new Vector3(-1, 0, 0); //redo this code
+            if (Input.GetKey(KeyCode.LeftArrow)) {
+                timer += Time.deltaTime;
+                if (timer > 0.1f) {
+                    Movement(-1);
+                    timer = 0.0f;
                 }
             }
 
-            else if (Input.GetKeyDown(KeyCode.RightArrow)) { //use coroutine for movement left to right. set speed for frame
-                CurrentPiece.transform.position += new Vector3(1, 0, 0);
-                if(!CurrentPiece.ValidMove()) {
-                    CurrentPiece.transform.position -= new Vector3(1, 0, 0);
+            else if (Input.GetKey(KeyCode.RightArrow)) { //use coroutine for movement left to right. set speed for frame
+                timer += Time.deltaTime;
+                if (timer > 0.1f) {
+                    Movement(1);
+                    timer = 0.0f;
                 }
             }
                 //t -= Time.deltaTime;
             if(Input.GetKeyDown(KeyCode.UpArrow)) {
                 CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), 90);
                 if(!CurrentPiece.ValidMove()) {
-                CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), -90);
+                    CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), -90);
                 }
             }
 
@@ -115,6 +98,14 @@ public class PieceController : MonoBehaviour
         }
 
     }
+
+    void Movement(int i) {
+        CurrentPiece.transform.position += new Vector3(i, 0, 0);
+        if(!CurrentPiece.ValidMove()) {
+            CurrentPiece.transform.position -= new Vector3(i, 0, 0); //redo this code
+        }
+    }
+
     void CheckForHold() {
         if (Input.GetKeyDown(KeyCode.C)) {
             if (spawner.HoldPiece == null) {
