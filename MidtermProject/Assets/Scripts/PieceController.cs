@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class PieceController : MonoBehaviour
 {
@@ -8,9 +9,27 @@ public class PieceController : MonoBehaviour
     private float previousTime;
     public float fallTime = 0.01f;
     public float softDropTime = 0.005f;
-    public float arr = 0.2f;
     private TetrisBlock CurrentPiece;
-    private float t;
+    //[SerializeField] private SpawnTetramino spawner;
+
+    [SerializeField] private TextMeshProUGUI timeUI;
+
+    private float timer;
+    public float _Time
+
+        {
+        // Getter property
+        get => timer;
+        
+        // Setter property
+        set
+        {
+            timer = value;
+            timeUI.text = _Time.ToString();
+        }
+    }
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     //[SerializeField] private AudioClip borderHit;
@@ -46,20 +65,22 @@ public class PieceController : MonoBehaviour
     void Update()
     {
         if (GameBehavior.Instance.State == Utilities.GameplayState.Play) {
-            if (Input.GetKey(KeyCode.LeftArrow) && t <= 0) {
+                timer += Time.time;
+                Debug.Log(timer);
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
                 CurrentPiece.transform.position += new Vector3(-1, 0, 0);
                 if(!CurrentPiece.ValidMove()) {
                     CurrentPiece.transform.position -= new Vector3(-1, 0, 0); //redo this code
                 }
             }
 
-            else if (Input.GetKey(KeyCode.RightArrow) && t <= 0) { //use coroutine for movement left to right. set speed for frame
+            else if (Input.GetKeyDown(KeyCode.RightArrow)) { //use coroutine for movement left to right. set speed for frame
                 CurrentPiece.transform.position += new Vector3(1, 0, 0);
                 if(!CurrentPiece.ValidMove()) {
                     CurrentPiece.transform.position -= new Vector3(1, 0, 0);
                 }
             }
-                t -= Time.deltaTime * 0.2f;
+                //t -= Time.deltaTime;
             if(Input.GetKeyDown(KeyCode.UpArrow)) {
                 CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), 90);
                 if(!CurrentPiece.ValidMove()) {
