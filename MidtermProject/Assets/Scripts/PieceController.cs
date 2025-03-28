@@ -106,6 +106,10 @@ public class PieceController : MonoBehaviour
     }
 
     public void RollRoll() {
-        CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), 180);
+        //Debug.Log(CurrentPiece.rotationPoint);
+        if(CurrentPiece.ValidMove()) {
+        CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), 90);
+        }
     }
+
 }

@@ -1,2 +1,18 @@
 fileFormatVersion: 2
 guid: bfa7fe8f5400247eab2b1a317270e0da
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _pauseMessage: {instanceID: 0}
+  - jabg: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - pieceDrop: {fileID: 8300000, guid: e7ec02e3e867d49df8a34360d36c53b5, type: 3}
+  - lineClear: {fileID: 8300000, guid: a694c1fb2ff924da3a894ea1b3ae61db, type: 3}
+  - _scoreUI: {instanceID: 0}
+  - _progressUI: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

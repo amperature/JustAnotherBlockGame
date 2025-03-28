@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 #if UNITY_EDITOR
@@ -19,6 +20,7 @@ public class GameBehavior : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip pieceDrop;
     [SerializeField] private AudioClip lineClear;
+    private TetrisBlock CurrentPiece;
 
     private int _score;
     public bool PieceDrop = false;
@@ -58,9 +60,13 @@ public class GameBehavior : MonoBehaviour
         //i += 1;
         //Debug.Log(i);
         
-        PieceController.Instance.RollRoll();
+        //CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), 180);
+        
+        FindAnyObjectByType<PieceController>().RollRoll();
 
-        yield return new WaitForSeconds(5f);
+        //PieceController.Instance.RollRoll();
+        
+        yield return null;
 
     }
 
@@ -79,9 +85,10 @@ public class GameBehavior : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            GameObject.DontDestroyOnLoad(gameObject);
         }        
         
+        GameObject PieceMover = GameObject.Find("PieceMovement");
     }
 
     void Start() {
@@ -103,15 +110,20 @@ public class GameBehavior : MonoBehaviour
         {
             QuitApp();
         }
-        if (Progress > 5 && Progress < 10) {
-            StartCoroutine("MyCoroutine");
+        if (Input.GetKeyDown(KeyCode.H)) {
+            Scene scene = SceneManager.GetActiveScene();  
+            SceneManager.LoadScene("Home");
+            }
+        if (Progress > 100 && Progress < 105 || Progress > 200 && Progress < 205) {
+            Debug.Log("brug");
+            StartCoroutine(MyCoroutine());
         }
 
     }
 
     public void GameOver() {
         State = Utilities.GameplayState.Pause;
-        jabg.text = "Game Over. Press Q to Quit";
+        jabg.text = "Game Over. Press R to Restart or Q to Quit.";
     }
     public void ScorePoint()
     {
