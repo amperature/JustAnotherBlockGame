@@ -52,6 +52,16 @@ public class GameBehavior : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreUI;
     [SerializeField] private TextMeshProUGUI _progressUI;
 
+    int i = 1;
+    IEnumerator MyCoroutine() {
+
+        i += 1;
+        Debug.Log(i);
+        
+        yield return new WaitForSeconds(5f);
+
+    }
+
     void Awake()
     {
         // Singleton pattern (took this from the Game Behavior script in pong)
@@ -91,11 +101,14 @@ public class GameBehavior : MonoBehaviour
         {
             QuitApp();
         }
+        if (Progress > 5 && Progress < 10) {
+        StartCoroutine("MyCoroutine");
+        }
+
     }
 
     public void GameOver() {
         State = Utilities.GameplayState.Pause;
-        //_pauseMessage.text = "Game Over.";
         jabg.text = "Game Over. Press Q to Quit";
     }
     public void ScorePoint()
@@ -124,7 +137,5 @@ public class GameBehavior : MonoBehaviour
             Application.Quit();
         #endif
     }
-
-
 
 }

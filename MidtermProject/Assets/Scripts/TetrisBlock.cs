@@ -8,6 +8,8 @@ public class TetrisBlock : MonoBehaviour
     
     private static Transform[,] grid = new Transform[10, 20];
 
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -103,7 +105,7 @@ void CheckEndGame()
             int roundedX = Mathf.RoundToInt(children.transform.position.x);
             int roundedY = Mathf.RoundToInt(children.transform.position.y);
 
-            Debug.Log(roundedY);
+            //Debug.Log(roundedY);
 
             //if (roundedY >= 18 || roundedY > height) {
             //}

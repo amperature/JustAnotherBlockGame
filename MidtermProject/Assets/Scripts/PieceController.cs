@@ -10,6 +10,7 @@ public class PieceController : MonoBehaviour
     public float fallTime = 0.01f;
     public float softDropTime = 0.005f;
     private TetrisBlock CurrentPiece;
+    //int progress = FindObjectOfType<GameBehavior>().Progress;
 
     //[SerializeField] private TextMeshProUGUI timeUI;
 
@@ -19,29 +20,11 @@ public class PieceController : MonoBehaviour
 
     //public IEnumerator PieceSlow;
 
-    void ResetTime() {
-        fallTime = 0.1f;
-    }
-
-    IEnumerator PieceSlow() {
-            if (Input.GetKeyDown(KeyCode.A)) {
-
-            fallTime = 2f;
-            Debug.Log("yeah");
-            }
-        yield return new WaitForSeconds(0.2f);
-
-        if (Input.GetKeyUp(KeyCode.A)) {
-            fallTime = 0.01f;
-        }
-        //fallTime = 1f;
-
-    }
-
     void Start()
     {
         CurrentPiece = spawner.NewTetramino();
         //slowPiece = StartCoroutine("PieceSlow");
+        //StartCoroutine("MyCoroutine");
     }
 
     // Update is called once per frame
@@ -89,10 +72,17 @@ public class PieceController : MonoBehaviour
                 previousTime = Time.time;
             
             }
-                StartCoroutine(PieceSlow());
 
-            //if (Input.GetKeyDown(KeyCode.A)) {
-            //}
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                CurrentPiece.CheckForLines();
+                CurrentPiece.transform.position += new Vector3(0, -15, 0);
+                if(!CurrentPiece.ValidMove()) {
+                    CurrentPiece.transform.position -= new Vector3(0, -15, 0);
+                    CurrentPiece.AddToGrid();
+                    CurrentPiece.enabled = false;
+                    CurrentPiece = spawner.NewTetramino();
+                }
+            }
 
             CheckForHold();
         }
