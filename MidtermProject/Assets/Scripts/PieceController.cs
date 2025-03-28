@@ -10,21 +10,14 @@ public class PieceController : MonoBehaviour
     public float fallTime = 0.01f;
     public float softDropTime = 0.005f;
     private TetrisBlock CurrentPiece;
-    //int progress = FindObjectOfType<GameBehavior>().Progress;
-
-    //[SerializeField] private TextMeshProUGUI timeUI;
-
     private float timer;
+    public static PieceController Instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    //public IEnumerator PieceSlow;
 
     void Start()
     {
         CurrentPiece = spawner.NewTetramino();
-        //slowPiece = StartCoroutine("PieceSlow");
-        //StartCoroutine("MyCoroutine");
     }
 
     // Update is called once per frame
@@ -46,7 +39,7 @@ public class PieceController : MonoBehaviour
                     timer = 0.0f;
                 }
             }
-                //t -= Time.deltaTime;
+
             if(Input.GetKeyDown(KeyCode.UpArrow)) {
                 CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), 90);
                 if(!CurrentPiece.ValidMove()) {
@@ -85,6 +78,7 @@ public class PieceController : MonoBehaviour
             }
 
             CheckForHold();
+
         }
 
     }
@@ -108,7 +102,10 @@ public class PieceController : MonoBehaviour
             spawner.HoldPiece.transform.position = HoldContainer.position;
             spawner.HoldPiece.transform.rotation = Quaternion.identity;
             CurrentPiece.transform.position = spawner.transform.position;
-            //spawner.HoldPiece.transform.RotateAround(spawner.HoldPiece.transform.TransformPoint(spawner.HoldPiece.rotationPoint), new Vector3(0, 0, 0), 0);
         }
+    }
+
+    public void RollRoll() {
+        CurrentPiece.transform.RotateAround(CurrentPiece.transform.TransformPoint(CurrentPiece.rotationPoint), new Vector3(0, 0, -1), 180);
     }
 }

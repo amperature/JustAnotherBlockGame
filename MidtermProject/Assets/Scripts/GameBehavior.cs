@@ -52,12 +52,14 @@ public class GameBehavior : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreUI;
     [SerializeField] private TextMeshProUGUI _progressUI;
 
-    int i = 1;
+    //int i = 1;
     IEnumerator MyCoroutine() {
 
-        i += 1;
-        Debug.Log(i);
+        //i += 1;
+        //Debug.Log(i);
         
+        PieceController.Instance.RollRoll();
+
         yield return new WaitForSeconds(5f);
 
     }
@@ -102,7 +104,7 @@ public class GameBehavior : MonoBehaviour
             QuitApp();
         }
         if (Progress > 5 && Progress < 10) {
-        StartCoroutine("MyCoroutine");
+            StartCoroutine("MyCoroutine");
         }
 
     }
